@@ -1,5 +1,4 @@
-__author__ = "a"
-__version__ = "2019.03.26"
+__author__ = "tetov"
 
 import Rhino.Geometry as rg
 import Rhino.RhinoDoc
@@ -8,7 +7,7 @@ from System.Collections.Generic import List
 def projectToMesh():
     print("start")
     tolerance = Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance
-    curveList = List[rg.Curve]()
+    curve_list = List[rg.Curve]()
 
     outCurves = []
     print len(inCurves)

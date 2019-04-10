@@ -1,12 +1,17 @@
 """Provides a scripting component.
     Inputs:
-        x: The x script variable
-        y: The y script variable
+        axisStart:
+        axisDirection:
+        helixStart:
+        pitch:
+        turnCount:
+        radius1:
+        radius2:
     Output:
-        a: The a output variable"""
+        a: Output spiral
+"""
 
-__author__ = "a"
-__version__ = "2019.04.02"
+__author__ = "tetov"
 
 import Rhino.Geometry as rg
 

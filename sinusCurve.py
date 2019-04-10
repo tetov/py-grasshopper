@@ -2,10 +2,12 @@
     Inputs:
         curve: input curve
         amplitude: amplitude in sin equation
-        curveResolution: TK
-        decayBool: decayBool
+        curveResolution: count to divide curve by
+        decayBool: enable linear decrease in amplitude
+        decayValue: value to decay amplitude by
+        phaseShift: amount to shift curve by
     Output:
-        curve: output curve
+        outCurve: output curve
 """
 __author__ = "tetov"
 
@@ -19,7 +21,6 @@ def decay(z):
 
 def main():
     frequency = curveResolution / 4
-    #print(frequency)
     points = []
 
     params = StrongBox[Array[rg.Point3d]]()
@@ -35,8 +36,7 @@ def main():
         eq = x / ( len(params)-1 )
         eq *= 2 * math.pi
         eq *= frequency
-        #fun
-        #eq = math.pow(math.sin(eq), 2.0)
+        # eq = math.pow(math.sin(eq), 2.0)
 
         if decayBool:
              eq *= decay(x)
