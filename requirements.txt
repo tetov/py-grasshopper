@@ -1,4 +1,0 @@
-GH-IO-stubs==0.0.4
-GH-Util-stubs==0.0.4
-Grasshopper-stubs==0.0.4
-Rhino-stubs==0.0.5
