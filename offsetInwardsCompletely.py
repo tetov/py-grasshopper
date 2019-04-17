@@ -8,21 +8,34 @@
 __author__ = "tetov"
 __version__ = "2019.04.16"
 
+import Rhino.RhinoDoc
 import Rhino.Geometry as rg
+from ghpythonlib import components as ghcomp
 
 offset_curves = []
+tolerance = Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance
+angle_tolerance = Rhino.RhinoDoc.ActiveDoc.ModelAngleToleranceRadians
 
-area = min_area + 1.0
+i = 0
 
-area_not_exceeded = True
+if simplify_bool:
+    curves = curves.Simplify(rg.CurveSimplifyOptions.All, tolerance * 100, angle_tolerance)
 
-while area_not_exceeded:
+def offsetInwards(input_curve):
+    return input_curve.Offset(rg.Plane.WorldXY, step_size * -1 * i, tolerance, rg.CurveOffsetCornerStyle.Sharp)
 
-   new_offset = curves.Offset(rg.Plane.WorldXY(), steps, steps/10, rg.CurveOffsetCornerStyle.Sharp())
+while i < 100:
+    i += 1
+    if offsetInwards(curves) is not None:
+        new_offset = offsetInwards(curves)[0]
+    else:
+        break
+    if rg.Intersect.Intersection.CurveSelf(new_offset, tolerance).Count > 0:
+        break
+    else:
+        intersect_list = list(offset_curves)
+        intersect_list.append(new_offset)
+        if ghcomp.MultipleCurves(intersect_list)[0] is not None:
+            break
 
-   area = rg.AreaMassProperties.Compute(new_offset)
-
-   if area > min_area:
-      offset_curves.append(new_offset)
-   else
-      area_not_exceeded = False
+    offset_curves.append(new_offset)
