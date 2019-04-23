@@ -1,3 +1,6 @@
+# Well this was a good challenge but then I found out about
+# medial axis...
+
 """Offsets curves inwards until offset is no longer valid
     Inputs:
         C: Curves to offset inwards
