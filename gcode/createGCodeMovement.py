@@ -34,10 +34,10 @@ ghenv.Component.Params.Output[1].Name = "gcode commands"
 gcode = []
 
 def generate_g1(input_pt):
-    g1_command = "G1 F%d X%f Y%f Z%f" % (speed, input_pt.X, input_pt.Y, input_pt.Z)
+    g1_command = "G1 F%d X%.3f Y%.3f Z%.3f" % (speed, input_pt.X, input_pt.Y, input_pt.Z)
     return g1_command
 
-if not speed: speed = 3600
+if not speed: speed = 1500
 elif speed[0] <= 0: raise ValueError('Zero or negative speed values not accepted')
 else:
     if len(speed) > 1:
