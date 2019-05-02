@@ -9,12 +9,12 @@
 """
 
 __author__ = "tetov"
-__date__ = "20190430"
+__date__ = "20190502"
 
 from os import path
 from itertools import groupby
 from datetime import datetime
-import ghpythonlib.treehelpers as th
+from ghpythonlib import treehelpers as th
 
 # Component setup
 
@@ -46,9 +46,6 @@ ghenv.Component.Params.Output[1].Name = "Processed gcode"
 if index is None:
     index = 0
 
-if remove_dups_bool is None:
-    remove_dups_bool = False
-
 def insert_commands(gcode, new_commands, index):
     gcode[index:index] = new_commands
     return gcode
@@ -63,16 +60,15 @@ def remove_dups(input):
 
 def bounds(list_w_nums):
 
-    if type(list_w_nums) is not list:
+    if not list_w_nums.DataCount:
+        return "None specified"
+    else:
         list_w_nums = th.tree_to_list(list_w_nums)
 
-    if list_w_nums is None:
-        return
-    elif len(list_w_nums) > 1:
+    if len(list_w_nums) > 1:
         return min(list_w_nums), max(list_w_nums)
     else:
         return list_w_nums[0]
-
 
 
 def main():
