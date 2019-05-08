@@ -10,32 +10,12 @@
 """
 
 __author__ = "tetov"
-__date__ = "20190506"
+__date__ = "20190508"
 
 from Rhino import Geometry as rg
 from ghpythonlib import components as ghcomp
 
-ghenv.Component.Name = 'Sort curves sequentially'
 ghenv.Component.NickName = 'seqSortCurves'
-ghenv.Component.Message = __author__ + " " + __date__
-
-ghenv.Component.Params.Input[1].NickName = "crvs"
-ghenv.Component.Params.Input[1].Name = "Curves to sort"
-ghenv.Component.Params.Input[1].Description = "Curves to sort"
-
-ghenv.Component.Params.Input[2].NickName = "start_index"
-ghenv.Component.Params.Input[2].Name = "Index of curve to start sorting from"
-ghenv.Component.Params.Input[
-    2].Description = "Index of curve to start sorting from"
-
-ghenv.Component.Params.Output[1].NickName = "sorted_crvs"
-ghenv.Component.Params.Output[1].Name = "Sorted curves"
-ghenv.Component.Params.Output[1].Description = "The sequentially sorted curves"
-
-ghenv.Component.Params.Output[2].NickName = "indices"
-ghenv.Component.Params.Output[2].Name = "Indices"
-ghenv.Component.Params.Output[
-    2].Description = "The parallel sorted list of indices"
 
 if start_index is None:
     start_index = 0

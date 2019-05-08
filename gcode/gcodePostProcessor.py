@@ -2,14 +2,16 @@
     Inputs:
         gcode: gcode for post processing
         remove_dups_bool: Remove duplicate gcode commands (e.g G92 E0 x 2 from Silkworm)
-        command: gcode commands to insert
+        command: gcode commands to add at specified index
         index: Index for position of insertion
+        flow: Flow rates. If more than one value is specified the bounds of the flow values will be printed in the gcode.
+        spede: Feed rates. If more than one value is specified the bounds of the values will be printed in the gcode.
     Output:
         out_gcode: Processed gcode
 """
 
 __author__ = "tetov"
-__date__ = "20190502"
+__date__ = "20190508"
 
 from os import path
 from itertools import groupby
@@ -18,33 +20,11 @@ from ghpythonlib import treehelpers as th
 
 # Component setup
 
-ghenv.Component.Name = "gcode Post Processor"
 ghenv.Component.NickName = 'gcodePostProcessor'
-ghenv.Component.Message = __author__ + " " + __date__
-
-ghenv.Component.Params.Input[1].NickName = "gcode"
-ghenv.Component.Params.Input[1].Name = "GCode to be processed."
-
-ghenv.Component.Params.Input[2].NickName = "remove_dups_bool"
-ghenv.Component.Params.Input[2].Name = "Remove duplicate commands?"
-
-ghenv.Component.Params.Input[3].NickName = "commands"
-ghenv.Component.Params.Input[3].Name = "Command to add at index."
-
-ghenv.Component.Params.Input[4].NickName = "index"
-ghenv.Component.Params.Input[4].Name = "Index to insert command"
-
-ghenv.Component.Params.Input[5].NickName = "flow"
-ghenv.Component.Params.Input[5].Name = "Flowrate"
-
-ghenv.Component.Params.Input[6].NickName = "speed"
-ghenv.Component.Params.Input[6].Name = "Feedrate"
-
-ghenv.Component.Params.Output[1].NickName = "out_gcode"
-ghenv.Component.Params.Output[1].Name = "Processed gcode"
 
 if index is None:
     index = 0
+
 
 def insert_commands(gcode, new_commands, index):
     gcode[index:index] = new_commands

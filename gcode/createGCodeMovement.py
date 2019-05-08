@@ -4,32 +4,18 @@
         speed: Travel speed
         autohome: Autohome all axis before movement?
     Output:
-        gcode: Movements
+        gcode: gcode commands
 """
 
 __author__ = "tetov"
-__date__ = "20190430"
+__date__ = "20190508"
 
 import Rhino.Geometry as rg
 import Grasshopper.Kernel as gh
 
 w = gh.GH_RuntimeMessageLevel.Warning
 
-ghenv.Component.Name = 'createGcodeMovement'
-ghenv.Component.NickName = 'gMovement'
-ghenv.Component.Message = __author__ + " " + __date__
-
-ghenv.Component.Params.Input[1].NickName = "pts"
-ghenv.Component.Params.Input[1].Name = "Points"
-
-ghenv.Component.Params.Input[2].NickName = "speed"
-ghenv.Component.Params.Input[2].Name = "Travel speed"
-
-ghenv.Component.Params.Input[3].NickName = "autohome"
-ghenv.Component.Params.Input[3].Name = "Autohome all axis at start?"
-
-ghenv.Component.Params.Output[1].NickName = "gcode"
-ghenv.Component.Params.Output[1].Name = "gcode commands"
+ghenv.Component.NickName = 'createGcodeMovement'
 
 if not speed:
     speed = 1500
