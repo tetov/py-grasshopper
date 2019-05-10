@@ -11,7 +11,7 @@
 """
 
 __author__ = "tetov"
-__date__ = "20190508"
+__date__ = "20190510"
 
 from os import path
 from itertools import groupby
@@ -43,6 +43,7 @@ def bounds(list_w_nums):
     if not list_w_nums.DataCount:
         return "None specified"
     else:
+        list_w_nums.Flatten()
         list_w_nums = th.tree_to_list(list_w_nums)
 
     if len(list_w_nums) > 1:
@@ -58,8 +59,8 @@ def main():
     gcode_comments = [
         ";Filename: " + path.basename(ghdoc.Path),
         ";Created: " + str(datetime.now()),
-        ";Flow rate: " + str(bounds(flow)),
-        ";Feed rate: " + str(bounds(speed)),
+        ";Flow rate (min and max): " + str(bounds(flow)),
+        ";Feed rate (min and max): " + str(bounds(speed)),
     ]
     new_gcode = insert_commands(new_gcode, gcode_comments, 0)
 
